@@ -44,4 +44,10 @@ public class CategoriaService {
     public Iterable<Categoria> obterTodasCategoria() {
         return categoriaRepository.findAll();
     }
+
+    public Categoria atualizarCategoria(Categoria categoria) {
+        Categoria categoriaAntiga = procurarCategoriaPorId(categoria.getId());
+        categoriaAntiga.setNome(categoria.getNome());
+        return categoriaRepository.save(categoriaAntiga);
+    }
 }
