@@ -5,6 +5,8 @@ import br.com.zup.sistemamarketing.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CategoriaService {
 
@@ -17,5 +19,15 @@ public class CategoriaService {
 
     public Categoria cadastrarNovaCategoria(Categoria categoria) {
         return categoriaRepository.save(categoria);
+    }
+
+    public Categoria procurarCategoriaPorId(Integer id) {
+        Optional<Categoria> categoriaOptional = categoriaRepository.findById(id);
+
+        if (categoriaOptional.isEmpty()) {
+            throw new RuntimeException("Categoria com id " + id + " não existe!");
+        }
+
+        return categoriaOptional.get();
     }
 }
