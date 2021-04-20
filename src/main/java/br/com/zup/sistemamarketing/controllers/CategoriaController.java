@@ -1,6 +1,7 @@
 package br.com.zup.sistemamarketing.controllers;
 
 import br.com.zup.sistemamarketing.dtos.categoria.entrada.AtualizarCategoriaDTO;
+import br.com.zup.sistemamarketing.dtos.categoria.entrada.BuscarCategoriaDTO;
 import br.com.zup.sistemamarketing.dtos.categoria.entrada.CadastrarCategoriaDTO;
 import br.com.zup.sistemamarketing.dtos.categoria.saida.SaidaCategoriaDTO;
 import br.com.zup.sistemamarketing.models.Categoria;
@@ -60,5 +61,14 @@ public class CategoriaController {
         } catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
+    }
+
+    @GetMapping("buscar")
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<SaidaCategoriaDTO> procurarPOrCategoriaPorIdOuNome(@ModelAttribute
+                                                                               BuscarCategoriaDTO buscarCategoriaDTO) {
+        Iterable<Categoria> categorias = categoriaService.procurarCategoriaPorIdOuNome(
+                buscarCategoriaDTO.getId(), buscarCategoriaDTO.getNome());
+        return SaidaCategoriaDTO.gerarListaDeDto(categorias);
     }
 }
