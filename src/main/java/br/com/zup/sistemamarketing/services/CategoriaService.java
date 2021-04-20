@@ -41,6 +41,10 @@ public class CategoriaService {
         return categoriaOptional.get();
     }
 
+    public Iterable<Categoria> procurarCategoriaPorNome(Integer id, String nome) {
+        return categoriaRepository.findByIdOrNome(id, nome);
+    }
+
     public Iterable<Categoria> obterTodasCategoria() {
         return categoriaRepository.findAll();
     }
