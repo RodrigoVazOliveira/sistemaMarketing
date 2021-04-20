@@ -13,6 +13,13 @@ public class CadastrarCategoriaDTO {
     @Length(message = "O campo nome possui um limite de 80 caracteres")
     private String nome;
 
+    public CadastrarCategoriaDTO() {
+    }
+
+    public CadastrarCategoriaDTO(String nome) {
+        this.nome = nome;
+    }
+
     public String getNome() {
         return nome;
     }
