@@ -11,7 +11,7 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 80)
+    @Column(length = 80, nullable = false)
     private String nome;
 
     public Integer getId() {
