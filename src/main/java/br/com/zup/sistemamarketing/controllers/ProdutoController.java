@@ -1,6 +1,7 @@
 package br.com.zup.sistemamarketing.controllers;
 
 import br.com.zup.sistemamarketing.dtos.produto.entrada.CadastrarProdutoDTO;
+import br.com.zup.sistemamarketing.dtos.produto.saida.SaidaProdutoDTO;
 import br.com.zup.sistemamarketing.models.Produto;
 import br.com.zup.sistemamarketing.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,6 @@ public class ProdutoController {
         Produto produto = produtoService.cadastrarNovoProduto(
                 cadastrarProdutoDTO.converterDtoParaModelo()
         );
+        return SaidaProdutoDTO.converterModeloParaDto(produto);
     }
 }
