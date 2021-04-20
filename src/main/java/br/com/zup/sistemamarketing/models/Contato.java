@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "contatos/")
+@Table(name = "contatos")
 public class Contato {
 
     @Id
@@ -25,14 +25,6 @@ public class Contato {
     private List<Produto> produtos;
 
     public Contato() {
-    }
-
-    public Contato(Integer id, String nomeCompleto, String email, String telefone, List<Produto> produtos) {
-        this.id = id;
-        this.nomeCompleto = nomeCompleto;
-        this.email = email;
-        this.telefone = telefone;
-        this.produtos = produtos;
     }
 
     public Integer getId() {
