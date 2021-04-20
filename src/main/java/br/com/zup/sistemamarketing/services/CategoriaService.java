@@ -50,4 +50,9 @@ public class CategoriaService {
         categoriaAntiga.setNome(categoria.getNome());
         return categoriaRepository.save(categoriaAntiga);
     }
+
+    public void excluirCategoriaPorId(Integer id) {
+        Categoria categoria = procurarCategoriaPorId(id);
+        categoriaRepository.delete(categoria);
+    }
 }
