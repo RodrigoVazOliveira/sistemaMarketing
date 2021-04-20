@@ -29,4 +29,10 @@ public class CategoriaController {
                 cadastrarCategoriaDTO.converterDtoParaCategoria());
         return SaidaCategoriaDTO.converterModeloParaDto(categoria);
     }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<SaidaCategoriaDTO> mostrarTodasCategoria() {
+        return SaidaCategoriaDTO.gerarListaDeDto(categoriaService.obterTodasCategoria());
+    }
 }

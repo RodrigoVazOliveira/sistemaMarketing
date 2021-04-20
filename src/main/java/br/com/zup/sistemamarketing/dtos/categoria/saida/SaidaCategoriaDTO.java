@@ -2,6 +2,9 @@ package br.com.zup.sistemamarketing.dtos.categoria.saida;
 
 import br.com.zup.sistemamarketing.models.Categoria;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SaidaCategoriaDTO {
 
     private Integer id;
@@ -33,5 +36,13 @@ public class SaidaCategoriaDTO {
 
     public static SaidaCategoriaDTO converterModeloParaDto(Categoria categoria) {
         return new SaidaCategoriaDTO(categoria.getId(), categoria.getNome());
+    }
+
+    public static Iterable<SaidaCategoriaDTO> gerarListaDeDto(Iterable<Categoria> categorias) {
+        List<SaidaCategoriaDTO> dtos = new ArrayList<>();
+        for (Categoria categoria : categorias) {
+            dtos.add(converterModeloParaDto(categoria));
+        }
+        return dtos;
     }
 }
