@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdutoService {
@@ -36,5 +37,15 @@ public class ProdutoService {
 
     public Iterable<Produto> obterTodosProduto() {
         return produtoRepository.findAll();
+    }
+
+    public Produto buscarProdutoPorId(Integer id) {
+        Optional<Produto> optionalProduto = produtoRepository.findById(id);
+
+        if (optionalProduto.isEmpty()) {
+            throw new RuntimeException("Não existe produto com id " + id);
+        }
+
+        return optionalProduto.get();
     }
 }
