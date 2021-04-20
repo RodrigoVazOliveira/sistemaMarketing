@@ -41,11 +41,12 @@ public class ProdutoService {
 
     public Produto buscarProdutoPorId(Integer id) {
         Optional<Produto> optionalProduto = produtoRepository.findById(id);
-
         if (optionalProduto.isEmpty()) {
             throw new RuntimeException("Não existe produto com id " + id);
         }
 
         return optionalProduto.get();
     }
+
+
 }

@@ -29,4 +29,11 @@ public class ProdutoController {
         );
         return SaidaProdutoDTO.converterModeloParaDto(produto);
     }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<SaidaProdutoDTO> mostrarProduto() {
+        Iterable<Produto> produtos = produtoService.obterTodosProduto();
+        return SaidaProdutoDTO.converterListaModeloParaListaDto(produtos);
+    }
 }

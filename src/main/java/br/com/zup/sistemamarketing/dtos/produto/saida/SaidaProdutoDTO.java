@@ -51,4 +51,14 @@ public class SaidaProdutoDTO {
         }
         return new SaidaProdutoDTO(produto.getId(), produto.getNome(), categoriasDto);
     }
+
+    public static Iterable<SaidaProdutoDTO> converterListaModeloParaListaDto(Iterable<Produto> produtos) {
+        List<SaidaProdutoDTO> dtos = new ArrayList<>();
+
+        for (Produto produto : produtos) {
+            dtos.add(converterModeloParaDto(produto));
+        }
+
+        return dtos;
+    }
 }

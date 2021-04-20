@@ -18,6 +18,15 @@ public class Produto {
     @ManyToMany
     private List<Categoria> categorias;
 
+    public Produto() {
+    }
+
+    public Produto(Integer id, String nome, List<Categoria> categorias) {
+        this.id = id;
+        this.nome = nome;
+        this.categorias = categorias;
+    }
+
     public Integer getId() {
         return id;
     }
