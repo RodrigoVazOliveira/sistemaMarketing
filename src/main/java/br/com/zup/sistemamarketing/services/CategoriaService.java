@@ -40,4 +40,8 @@ public class CategoriaService {
 
         return categoriaOptional.get();
     }
+
+    public Iterable<Categoria> obterTodasCategoria() {
+        return categoriaRepository.findAll();
+    }
 }
