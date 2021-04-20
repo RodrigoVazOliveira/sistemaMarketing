@@ -35,7 +35,7 @@ public class CategoriaService {
         Optional<Categoria> categoriaOptional = categoriaRepository.findByNome(nome);
 
         if (categoriaOptional.isEmpty()) {
-            throw new RuntimeException("Categoria com id " + id + " não existe!");
+            throw new RuntimeException("Categoria com nome " + nome + " não existe!");
         }
 
         return categoriaOptional.get();
