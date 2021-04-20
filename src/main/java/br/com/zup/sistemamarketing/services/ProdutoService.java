@@ -33,4 +33,8 @@ public class ProdutoService {
         }
         return categoriasAdcionarNoProduto;
     }
+
+    public Iterable<Produto> obterTodosProduto() {
+        return produtoRepository.findAll();
+    }
 }
