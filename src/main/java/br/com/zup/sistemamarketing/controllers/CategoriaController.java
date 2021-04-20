@@ -1,5 +1,6 @@
 package br.com.zup.sistemamarketing.controllers;
 
+import br.com.zup.sistemamarketing.dtos.categoria.entrada.AtualizarCategoriaDTO;
 import br.com.zup.sistemamarketing.dtos.categoria.entrada.CadastrarCategoriaDTO;
 import br.com.zup.sistemamarketing.dtos.categoria.saida.SaidaCategoriaDTO;
 import br.com.zup.sistemamarketing.models.Categoria;
@@ -40,11 +41,22 @@ public class CategoriaController {
     @PutMapping("{id}/")
     @ResponseStatus(HttpStatus.CREATED)
     public SaidaCategoriaDTO atualizarCategoria(@RequestBody @Valid
-                                                            CadastrarCategoriaDTO cadastrarCategoriaDTO) {
+                                                        AtualizarCategoriaDTO AtualizarCategoriaDTO,
+                                                @PathVariable Integer id) {
         try {
-            Categoria categoria = categoriaService.cadastrarNovaCategoria(
-                    cadastrarCategoriaDTO.converterDtoParaCategoria());
+            Categoria categoria = categoriaService.atualizarCategoria(
+                    AtualizarCategoriaDTO.converterDtoParaCategoria(id));
             return SaidaCategoriaDTO.converterModeloParaDto(categoria);
+        } catch (RuntimeException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @DeleteMapping("{id}/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void excluirCategoriaPorId(@PathVariable Integer id) {
+        try {
+            categoriaService.excluirCategoriaPorId(id);
         } catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
