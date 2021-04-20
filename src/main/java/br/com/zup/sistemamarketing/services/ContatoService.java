@@ -25,15 +25,15 @@ public class ContatoService {
         return contatoRepository.save(contato);
     }
 
-        private List<Produto> verificarProdutos(List<Produto> produtos) {
-            List<Produto> produtosAdcionarContato = new ArrayList<>();
+    private List<Produto> verificarProdutos(List<Produto> produtos) {
+        List<Produto> produtosAdcionarContato = new ArrayList<>();
 
-            for (Produto produto : produtos) {
-                produtosAdcionarContato.add(
-                        produtoService.buscarProdutoPorId(produto.getId())
-                );
-            }
-
-            return produtosAdcionarContato;
+        for (Produto produto : produtos) {
+            produtosAdcionarContato.add(
+                    produtoService.buscarProdutoPorId(produto.getId())
+            );
         }
+
+        return produtosAdcionarContato;
+    }
 }
