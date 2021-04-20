@@ -59,4 +59,22 @@ public class CategoriaService {
         Categoria categoria = procurarCategoriaPorId(id);
         categoriaRepository.delete(categoria);
     }
+
+    /**
+     * responsável por verificar categoria que foi passado no produto
+     * caso ela já exista, será retornado ela para ser incluido na lista
+     * caso contrário, será cadastrada e retornarda para incluir na lista de categorias
+     * do produto
+     * @param categoria
+     * @return Categoria
+     * */
+    public Categoria verificarCategoriaPorNome(Categoria categoria) {
+        Optional<Categoria> optionalCategoria = categoriaRepository.findByNome(categoria.getNome());
+
+        if (optionalCategoria.isEmpty()) {
+            return cadastrarNovaCategoria(categoria);
+        }
+
+        return optionalCategoria.get();
+    }   
 }
