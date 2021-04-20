@@ -1,5 +1,6 @@
 package br.com.zup.sistemamarketing.services;
 
+import br.com.zup.sistemamarketing.models.Categoria;
 import br.com.zup.sistemamarketing.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,5 +13,9 @@ public class CategoriaService {
     @Autowired
     public CategoriaService(CategoriaRepository categoriaRepository) {
         this.categoriaRepository = categoriaRepository;
+    }
+
+    public Categoria cadastrarNovaCategoria(Categoria categoria) {
+        return categoriaRepository.save(categoria);
     }
 }
