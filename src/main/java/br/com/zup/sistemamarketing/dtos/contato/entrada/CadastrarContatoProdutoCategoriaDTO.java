@@ -33,7 +33,6 @@ public class CadastrarContatoProdutoCategoriaDTO {
                     new Categoria(nome)
             );
         }
-
         return categoriasModelos;
     }
 }
