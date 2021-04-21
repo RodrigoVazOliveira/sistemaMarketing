@@ -27,6 +27,13 @@ public class Contato {
     public Contato() {
     }
 
+    public Contato(String nomeCompleto, String email, String telefone, List<Produto> produtos) {
+        this.nomeCompleto = nomeCompleto;
+        this.email = email;
+        this.telefone = telefone;
+        this.produtos = produtos;
+    }
+
     public Integer getId() {
         return id;
     }
