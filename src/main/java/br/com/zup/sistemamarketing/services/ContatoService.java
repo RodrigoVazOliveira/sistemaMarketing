@@ -3,26 +3,32 @@ package br.com.zup.sistemamarketing.services;
 import br.com.zup.sistemamarketing.models.Contato;
 import br.com.zup.sistemamarketing.models.Produto;
 import br.com.zup.sistemamarketing.repositories.ContatoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContatoService {
 
     private final ContatoRepository contatoRepository;
     private final ProdutoService produtoService;
+    private final CategoriaService categoriaService;
 
-    public ContatoService(ContatoRepository contatoRepository,
-                          ProdutoService produtoService) {
+    @Autowired
+    public ContatoService(ContatoRepository contatoRepository, ProdutoService produtoService, CategoriaService categoriaService) {
         this.contatoRepository = contatoRepository;
         this.produtoService = produtoService;
+        this.categoriaService = categoriaService;
     }
 
     public Contato cadastrarNovoContato(Contato contato) {
-        contato.setProdutos(verificarProdutos(contato.getProdutos()));
-        return contatoRepository.save(contato);
+        if (!contatoRepository.existsByEmail(contato.getEmail())) {
+            contato.setProdutos(verificarProdutos(contato.getProdutos()));
+            return contatoRepository.save(contato);
+        }
     }
 
     private List<Produto> verificarProdutos(List<Produto> produtos) {
@@ -30,7 +36,7 @@ public class ContatoService {
 
         for (Produto produto : produtos) {
             produtosAdcionarContato.add(
-                    produtoService.buscarProdutoPorId(produto.getId())
+                    produtoService.buscarProdutoPorNome(produto.getNome())
             );
         }
 
