@@ -29,6 +29,7 @@ public class ContatoService {
             contato.setProdutos(verificarProdutos(contato.getProdutos()));
             return contatoRepository.save(contato);
         }
+        return contatoRepository.save(contato);
     }
 
     private List<Produto> verificarProdutos(List<Produto> produtos) {

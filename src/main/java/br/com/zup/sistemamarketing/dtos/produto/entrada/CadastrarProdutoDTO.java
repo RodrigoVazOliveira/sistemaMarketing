@@ -4,6 +4,7 @@ import br.com.zup.sistemamarketing.models.Categoria;
 import br.com.zup.sistemamarketing.models.Produto;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -15,6 +16,7 @@ public class CadastrarProdutoDTO {
     @NotNull(message = "O campo nome não foi informado")
     @NotEmpty(message = "O campo nome deve ser preenchido!")
     @Length(message = "O campo nome possui um limite de 80 caracteres")
+    @NotBlank(message = "O campo nome está em branco!")
     private String nome;
 
     @NotNull(message = "O campo categorias não foi informado")
