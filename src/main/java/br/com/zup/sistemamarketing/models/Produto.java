@@ -21,8 +21,7 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(Integer id, String nome, List<Categoria> categorias) {
-        this.id = id;
+    public Produto(String nome, List<Categoria> categorias) {
         this.nome = nome;
         this.categorias = categorias;
     }

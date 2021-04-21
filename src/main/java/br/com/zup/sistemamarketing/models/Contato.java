@@ -15,7 +15,7 @@ public class Contato {
     @Column(length = 150, nullable = false)
     private String nomeCompleto;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(length = 25)
@@ -25,6 +25,13 @@ public class Contato {
     private List<Produto> produtos;
 
     public Contato() {
+    }
+
+    public Contato(String nomeCompleto, String email, String telefone, List<Produto> produtos) {
+        this.nomeCompleto = nomeCompleto;
+        this.email = email;
+        this.telefone = telefone;
+        this.produtos = produtos;
     }
 
     public Integer getId() {

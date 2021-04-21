@@ -41,6 +41,7 @@ public class ProdutoService {
 
     public Produto buscarProdutoPorId(Integer id) {
         Optional<Produto> optionalProduto = produtoRepository.findById(id);
+
         if (optionalProduto.isEmpty()) {
             throw new RuntimeException("Não existe produto com id " + id);
         }
@@ -48,5 +49,13 @@ public class ProdutoService {
         return optionalProduto.get();
     }
 
+    public Produto buscarProdutoPorNome(String nome) {
+        Optional<Produto> optionalProduto = produtoRepository.findByNome(nome);
 
+        if (optionalProduto.isEmpty()) {
+            throw new RuntimeException("Não existe produto com nome " + nome);
+        }
+
+        return optionalProduto.get();
+    }
 }
