@@ -69,4 +69,8 @@ public class ProdutoService {
 
         return produtoRepository.save(produto);
     }
+
+    public Boolean verificarProdutoExistePorId(Integer id) {
+        return produtoRepository.existsById(id);
+    }
 }

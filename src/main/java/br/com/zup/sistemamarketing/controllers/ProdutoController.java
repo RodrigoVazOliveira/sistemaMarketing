@@ -36,4 +36,7 @@ public class ProdutoController {
         Iterable<Produto> produtos = produtoService.obterTodosProduto();
         return SaidaProdutoDTO.converterListaModeloParaListaDto(produtos);
     }
+
+    @PutMapping("{id}/")
+    @ResponseStatus(HttpStatus.CREATED)
 }
