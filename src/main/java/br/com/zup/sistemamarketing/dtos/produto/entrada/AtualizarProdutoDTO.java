@@ -47,8 +47,9 @@ public class AtualizarProdutoDTO {
         this.categorias = categorias;
     }
 
-    public Produto converterDtoParaModelo() {
+    public Produto converterDtoParaModelo(Integer id) {
         Produto produto = new Produto();
+        produto.setId(id);
         produto.setNome(this.nome);
 
         List<Categoria> categorias = new ArrayList<>();

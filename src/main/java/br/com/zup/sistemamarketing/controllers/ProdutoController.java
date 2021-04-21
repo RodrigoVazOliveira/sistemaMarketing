@@ -1,14 +1,18 @@
 package br.com.zup.sistemamarketing.controllers;
 
+import br.com.zup.sistemamarketing.dtos.produto.entrada.AtualizarProdutoDTO;
 import br.com.zup.sistemamarketing.dtos.produto.entrada.CadastrarProdutoDTO;
 import br.com.zup.sistemamarketing.dtos.produto.saida.SaidaProdutoDTO;
 import br.com.zup.sistemamarketing.models.Produto;
 import br.com.zup.sistemamarketing.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
 @RequestMapping("produtos/")
@@ -38,5 +42,29 @@ public class ProdutoController {
     }
 
     @PutMapping("{id}/")
-    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<SaidaProdutoDTO> atualizar(@PathVariable Integer id,
+                                                        @RequestBody
+                                                        @Valid
+                                                        AtualizarProdutoDTO atualizarProdutoDTO) {
+        try {
+            if (produtoService.verificarProdutoExistePorId(id)) {
+               return atualizarSeProdutoExiste(atualizarProdutoDTO.converterDtoParaModelo(id));
+            }
+            return atualizarSeProdutoNaoExiste(atualizarProdutoDTO.converterDtoParaModelo(null));
+        } catch (RuntimeException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    private ResponseEntity<SaidaProdutoDTO> atualizarSeProdutoExiste(Produto produto) {
+        Produto produtoAtualizado = produtoService.atualizarProduto(produto);
+        return ResponseEntity.noContent().build();
+    }
+
+    private ResponseEntity<SaidaProdutoDTO> atualizarSeProdutoNaoExiste(Produto produto) {
+        Produto produtoNovo = produtoService.cadastrarNovoProduto(produto);
+        return ResponseEntity
+                .status(201)
+                .body(SaidaProdutoDTO.converterModeloParaDto(produtoNovo));
+    }
 }
