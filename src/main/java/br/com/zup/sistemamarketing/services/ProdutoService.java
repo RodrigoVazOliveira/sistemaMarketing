@@ -58,4 +58,15 @@ public class ProdutoService {
 
         return optionalProduto.get();
     }
+
+    public Produto atualizarProduto(Produto produtoAtualizado) {
+        Produto produto = buscarProdutoPorId(produtoAtualizado.getId());
+
+        produto.setNome(produtoAtualizado.getNome());
+        produto.setCategorias(
+                gerarListaCategoriaParaCadastro(produtoAtualizado.getCategorias())
+        );
+
+        return produtoRepository.save(produto);
+    }
 }
