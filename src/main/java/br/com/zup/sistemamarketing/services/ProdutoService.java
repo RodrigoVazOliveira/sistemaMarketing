@@ -39,7 +39,7 @@ public class ProdutoService {
         return produtoRepository.findAll();
     }
 
-    public Produto buscarProdutoPorId(Integer id) {
+    public Produto procurarProdutoPorId(Integer id) {
         Optional<Produto> optionalProduto = produtoRepository.findById(id);
 
         if (optionalProduto.isEmpty()) {
@@ -49,7 +49,7 @@ public class ProdutoService {
         return optionalProduto.get();
     }
 
-    public Produto buscarProdutoPorNome(String nome) {
+    public Produto procurarProdutoPorNome(String nome) {
         Optional<Produto> optionalProduto = produtoRepository.findByNome(nome);
 
         if (optionalProduto.isEmpty()) {
@@ -60,7 +60,7 @@ public class ProdutoService {
     }
 
     public Produto atualizarProduto(Produto produtoAtualizado) {
-        Produto produto = buscarProdutoPorId(produtoAtualizado.getId());
+        Produto produto = procurarProdutoPorId(produtoAtualizado.getId());
 
         produto.setNome(produtoAtualizado.getNome());
         produto.setCategorias(

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ContatoService {
@@ -37,7 +36,7 @@ public class ContatoService {
 
         for (Produto produto : produtos) {
             produtosAdcionarContato.add(
-                    produtoService.buscarProdutoPorNome(produto.getNome())
+                    produtoService.procurarProdutoPorNome(produto.getNome())
             );
         }
 
