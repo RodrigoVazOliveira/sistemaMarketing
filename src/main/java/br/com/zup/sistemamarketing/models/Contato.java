@@ -15,7 +15,7 @@ public class Contato {
     @Column(length = 150, nullable = false)
     private String nomeCompleto;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(length = 25)
