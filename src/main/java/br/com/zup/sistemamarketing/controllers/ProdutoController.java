@@ -79,4 +79,14 @@ public class ProdutoController {
             throw new ResponseStatusException(HttpStatus.OK, e.getMessage());
         }
     }
+
+    @DeleteMapping("{id}/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletarProdutoPorId(@PathVariable Integer id) {
+        try {
+            produtoService.deletarProdutoPorId(id);
+        } catch (RuntimeException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
 }

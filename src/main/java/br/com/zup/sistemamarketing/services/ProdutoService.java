@@ -73,4 +73,9 @@ public class ProdutoService {
     public Boolean verificarProdutoExistePorId(Integer id) {
         return produtoRepository.existsById(id);
     }
+
+    public void deletarProdutoPorId(Integer id) {
+        Produto produtoParaDeletar = procurarProdutoPorId(id);
+        produtoRepository.delete(produtoParaDeletar);
+    }
 }
