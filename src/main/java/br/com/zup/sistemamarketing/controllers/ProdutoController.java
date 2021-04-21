@@ -67,4 +67,16 @@ public class ProdutoController {
                 .status(201)
                 .body(SaidaProdutoDTO.converterModeloParaDto(produtoNovo));
     }
+
+    @GetMapping("{id}/")
+    @ResponseStatus(HttpStatus.OK)
+    public SaidaProdutoDTO obterProdutoPorId(@PathVariable Integer id) {
+        try {
+            return SaidaProdutoDTO.converterModeloParaDto(
+                    produtoService.procurarProdutoPorId(id)
+            );
+        } catch (RuntimeException e) {
+            throw new ResponseStatusException(HttpStatus.OK, e.getMessage());
+        }
+    }
 }
