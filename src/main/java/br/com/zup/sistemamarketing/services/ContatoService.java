@@ -24,10 +24,10 @@ public class ContatoService {
     }
 
     public Contato cadastrarNovoContato(Contato contato) {
-        if (!contatoRepository.existsByEmail(contato.getEmail())) {
-            contato.setProdutos(verificarProdutos(contato.getProdutos()));
-            return contatoRepository.save(contato);
+        if (contatoRepository.existsByEmail(contato.getEmail())) {
+            throw new ContatoEmailJaExisteException("Um contato com e-mail " + contato.getEmail() + " já existe!");
         }
+        contato.setProdutos(verificarProdutos(contato.getProdutos()));
         return contatoRepository.save(contato);
     }
 
