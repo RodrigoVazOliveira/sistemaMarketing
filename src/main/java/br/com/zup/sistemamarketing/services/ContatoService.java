@@ -15,13 +15,11 @@ public class ContatoService {
 
     private final ContatoRepository contatoRepository;
     private final ProdutoService produtoService;
-    private final CategoriaService categoriaService;
 
     @Autowired
-    public ContatoService(ContatoRepository contatoRepository, ProdutoService produtoService, CategoriaService categoriaService) {
+    public ContatoService(ContatoRepository contatoRepository, ProdutoService produtoService) {
         this.contatoRepository = contatoRepository;
         this.produtoService = produtoService;
-        this.categoriaService = categoriaService;
     }
 
     public Contato cadastrarNovoContato(Contato contato) {
