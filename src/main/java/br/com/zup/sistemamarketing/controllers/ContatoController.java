@@ -90,4 +90,14 @@ public class ContatoController {
             }
 
     }
+
+    @DeleteMapping("{id}/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void excluirContatoPorId(@PathVariable Integer id) {
+        try {
+            contatoService.excluirContatoPorId(id);
+        } catch (RuntimeException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
 }
