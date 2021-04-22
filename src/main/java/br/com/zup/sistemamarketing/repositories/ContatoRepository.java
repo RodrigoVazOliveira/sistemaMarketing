@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface ContatoRepository extends CrudRepository<Contato, Integer> {
     Boolean existsByEmail(String email);
+    Iterable<Contato> findByProdutosNome(String nome);
 }
