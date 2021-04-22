@@ -1,5 +1,6 @@
 package br.com.zup.sistemamarketing.services;
 
+import br.com.zup.sistemamarketing.exceptions.contato.ContatoEmailJaExisteException;
 import br.com.zup.sistemamarketing.exceptions.contato.ContatoNaoExisteException;
 import br.com.zup.sistemamarketing.models.Contato;
 import br.com.zup.sistemamarketing.models.Produto;
@@ -24,10 +25,10 @@ public class ContatoService {
     }
 
     public Contato cadastrarNovoContato(Contato contato) {
-        if (!contatoRepository.existsByEmail(contato.getEmail())) {
-            contato.setProdutos(verificarProdutos(contato.getProdutos()));
-            return contatoRepository.save(contato);
+        if (contatoRepository.existsByEmail(contato.getEmail())) {
+            throw new ContatoEmailJaExisteException("Um contato com e-mail " + contato.getEmail() + " já existe!");
         }
+        contato.setProdutos(verificarProdutos(contato.getProdutos()));
         return contatoRepository.save(contato);
     }
 
