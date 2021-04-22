@@ -1,10 +1,12 @@
 package br.com.zup.sistemamarketing.dtos.contato.entrada;
 
+import br.com.zup.sistemamarketing.models.Categoria;
 import br.com.zup.sistemamarketing.models.Produto;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CadastrarContatoProdutoDTO {
@@ -15,13 +17,12 @@ public class CadastrarContatoProdutoDTO {
     private String nome;
 
     @NotNull(message = "O campo categorias não foi informado")
-    private CadastrarContatoProdutoCategoriaDTO categorias;
+    private List<String> categorias;
 
     public CadastrarContatoProdutoDTO() {
     }
 
-    public CadastrarContatoProdutoDTO(String nome,
-                                      CadastrarContatoProdutoCategoriaDTO categorias) {
+    public CadastrarContatoProdutoDTO(String nome, List<String> categorias) {
         this.nome = nome;
         this.categorias = categorias;
     }
@@ -34,18 +35,28 @@ public class CadastrarContatoProdutoDTO {
         this.nome = nome;
     }
 
-    public CadastrarContatoProdutoCategoriaDTO getCategorias() {
+    public List<String> getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(CadastrarContatoProdutoCategoriaDTO categorias) {
+    public void setCategorias(List<String> categorias) {
         this.categorias = categorias;
     }
 
     public Produto converterDtoParaModelo() {
         return new Produto(
                 nome,
-                categorias.converterDtoParaModelo()
+                converterNomeCategoriasParaCategorias()
         );
+    }
+
+    private List<Categoria> converterNomeCategoriasParaCategorias() {
+        List<Categoria> categoriasModelos = new ArrayList<>();
+        for (String nome : categorias) {
+            categoriasModelos.add(
+                    new Categoria(nome)
+            );
+        }
+        return categoriasModelos;
     }
 }
