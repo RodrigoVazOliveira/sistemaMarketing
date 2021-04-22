@@ -67,11 +67,35 @@ public class ContatoService {
         contatoAtual.setNomeCompleto(contatoAtualizado.getNomeCompleto());
         contatoAtual.setEmail(contatoAtualizado.getEmail());
         contatoAtual.setTelefone(contatoAtualizado.getTelefone());
+        atualizarListaProdutosDoContatoAoAtualizar(contatoAtual, contatoAtualizado);
 
+        return contatoRepository.save(contatoAtual);
+    }
+
+    public Contato atualizarContatoParcialmente(Contato contatoAtualizado) {
+        Contato contatoAtual = procurarContatoPorId(contatoAtualizado.getId());
+
+        if (contatoAtualizado.getNomeCompleto() != null
+                && !contatoAtualizado.getNomeCompleto().equals(contatoAtual.getNomeCompleto())) {
+            contatoAtual.setNomeCompleto(contatoAtualizado.getNomeCompleto());
+        }
+        if (contatoAtualizado.getEmail() != null
+                && !contatoAtualizado.getEmail().equals(contatoAtual.getEmail())) {
+            contatoAtual.setEmail(contatoAtualizado.getEmail());
+        }
+        if (contatoAtualizado.getTelefone() != null
+                && !contatoAtualizado.getTelefone().equals(contatoAtual.getTelefone())) {
+            contatoAtual.setTelefone(contatoAtualizado.getTelefone());
+        }
+        atualizarListaProdutosDoContatoAoAtualizar(contatoAtual, contatoAtualizado);
+
+        return contatoRepository.save(contatoAtual);
+    }
+
+    private void atualizarListaProdutosDoContatoAoAtualizar(Contato contatoAtual,
+                                                            Contato contatoAtualizado) {
         List<Produto> listaProdutos = verificarProdutos(contatoAtualizado.getProdutos());
         listaProdutos.addAll(contatoAtual.getProdutos());
         contatoAtual.setProdutos(listaProdutos);
-
-        return contatoRepository.save(contatoAtual);
     }
 }
