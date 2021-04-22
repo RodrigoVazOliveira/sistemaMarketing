@@ -42,4 +42,8 @@ public class ContatoService {
 
         return produtosAdcionarContato;
     }
+
+    public Iterable<Contato> obterTodosContatos() {
+        return contatoRepository.findAll();
+    }
 }
