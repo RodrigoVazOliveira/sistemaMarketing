@@ -57,4 +57,17 @@ public class ContatoService {
 
         return optionalContato.get();
     }
+
+    public Contato atualizarContatoCompleto(Contato contatoAtualizado) {
+        Contato contatoAtual = procurarContatoPorId(contatoAtualizado.getId());
+        contatoAtual.setNomeCompleto(contatoAtualizado.getNomeCompleto());
+        contatoAtual.setEmail(contatoAtualizado.getEmail());
+        contatoAtual.setTelefone(contatoAtualizado.getTelefone());
+
+        List<Produto> listaProdutos = verificarProdutos(contatoAtualizado.getProdutos());
+        listaProdutos.addAll(contatoAtual.getProdutos());
+        contatoAtual.setProdutos(listaProdutos);
+
+        return contatoRepository.save(contatoAtual);
+    }
 }
