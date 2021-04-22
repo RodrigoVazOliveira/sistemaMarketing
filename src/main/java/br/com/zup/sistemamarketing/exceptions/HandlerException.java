@@ -1,6 +1,7 @@
 package br.com.zup.sistemamarketing.exceptions;
 
 import br.com.zup.sistemamarketing.exceptions.categoria.CategoriaNaoExisteException;
+import br.com.zup.sistemamarketing.exceptions.contato.ContatoNaoExisteException;
 import br.com.zup.sistemamarketing.exceptions.produto.ProdutoNaoExisteException;
 import br.com.zup.sistemamarketing.exceptions.validacao.ErroDeValidacao;
 import br.com.zup.sistemamarketing.exceptions.validacao.ValidacaoComArgs;
@@ -53,6 +54,12 @@ public class HandlerException extends ResponseEntityExceptionHandler {
     @ExceptionHandler({ProdutoNaoExisteException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ValidacaoSemArgs produtoNaoExisteException(ProdutoNaoExisteException e) {
+        return new ValidacaoSemArgs(e.getStatus(), e.getTipoDeErro(), e.getMotivo(), e.getMessage());
+    }
+
+    @ExceptionHandler({ContatoNaoExisteException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ValidacaoSemArgs contatoNaoExisteException(ContatoNaoExisteException e) {
         return new ValidacaoSemArgs(e.getStatus(), e.getTipoDeErro(), e.getMotivo(), e.getMessage());
     }
 }
