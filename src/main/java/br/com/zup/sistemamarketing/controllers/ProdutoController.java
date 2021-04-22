@@ -57,7 +57,7 @@ public class ProdutoController {
     }
 
     private ResponseEntity<SaidaProdutoDTO> atualizarSeProdutoExiste(Produto produto) {
-        Produto produtoAtualizado = produtoService.atualizarProduto(produto);
+        produtoService.atualizarProduto(produto);
         return ResponseEntity.noContent().build();
     }
 
