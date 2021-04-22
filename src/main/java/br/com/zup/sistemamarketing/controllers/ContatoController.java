@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.servlet.http.PushBuilder;
 import javax.validation.Valid;
 
 @RestController
@@ -104,10 +103,19 @@ public class ContatoController {
 
     @GetMapping("produtos")
     @ResponseStatus(HttpStatus.OK)
-    public Iterable<ContatoDTO> procurarContatoPorNomeDeProduto(
+    public Iterable<ContatoDTO> filtrarContatoPorNomeDeProduto(
             @ModelAttribute FiltroPorNomeDeProdutoDTO filtroPorNomeDeProdutoDTO) {
         return ContatoDTO.converterListaModeloParaListaDto(
                 contatoService.procurarContatoPorNomeDeProduto(filtroPorNomeDeProdutoDTO.getNome())
+        );
+    }
+
+    @GetMapping("produtos/categorias")
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<ContatoDTO> filtrarContatoPorNomeDeCategoriaDoProduto(
+            @ModelAttribute FiltroPorNomeDeProdutoDTO filtroPorNomeDeProdutoDTO) {
+        return ContatoDTO.converterListaModeloParaListaDto(
+                contatoService.procurarContatoPorNomeDeCategoriaDoProduto(filtroPorNomeDeProdutoDTO.getNome())
         );
     }
 }

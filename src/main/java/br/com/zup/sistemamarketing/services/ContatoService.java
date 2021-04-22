@@ -128,4 +128,12 @@ public class ContatoService {
 
         return contatoRepository.findByProdutosNome(nome);
     }
+
+    public Iterable<Contato> procurarContatoPorNomeDeCategoriaDoProduto(String nome) {
+        if (nome == null) {
+            return obterTodosContatos();
+        }
+
+        return contatoRepository.findByProdutosCategoriasNome(nome);
+    }
 }
