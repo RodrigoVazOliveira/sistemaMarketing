@@ -35,4 +35,12 @@ public class ContatoController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<ContatoDTO> mostrarTodosContatos() {
+        return ContatoDTO.converterListaModeloParaListaDto(
+                contatoService.obterTodosContatos()
+        );
+    }
 }
