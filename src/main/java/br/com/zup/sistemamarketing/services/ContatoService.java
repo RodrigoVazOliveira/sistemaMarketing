@@ -122,6 +122,10 @@ public class ContatoService {
     }
 
     public Iterable<Contato> procurarContatoPorNomeDeProduto(String nome) {
+        if (nome == null) {
+            return obterTodosContatos();
+        }
+
         return contatoRepository.findByProdutosNome(nome);
     }
 }
