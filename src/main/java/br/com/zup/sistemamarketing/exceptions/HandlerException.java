@@ -1,6 +1,7 @@
 package br.com.zup.sistemamarketing.exceptions;
 
 import br.com.zup.sistemamarketing.exceptions.validacao.ErroDeValidacao;
+import br.com.zup.sistemamarketing.exceptions.validacao.ValidacaoComArgs;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,16 @@ import java.util.List;
 public class HandlerException extends ResponseEntityExceptionHandler {
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return super.handleMethodArgumentNotValid(ex, headers, status, request);
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                                  HttpHeaders headers,
+                                                                  HttpStatus status, WebRequest request) {
+        ValidacaoComArgs validacaoComArgs = new ValidacaoComArgs(
+                status.value(),
+                "Validação",
+                status.getReasonPhrase(),
+                gerarListaDeErroDeCampo(ex)
+        );
+        return ResponseEntity.status(status).body(validacaoComArgs);
     }
 
     private List<ErroDeValidacao> gerarListaDeErroDeCampo(MethodArgumentNotValidException e) {
