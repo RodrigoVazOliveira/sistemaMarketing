@@ -32,6 +32,11 @@ public class ContatoService {
         return contatoRepository.save(contato);
     }
 
+    /**
+     * adicionar os produtos que estão salvos no banco para adicionar no novo contato
+     * @param produtos
+     * @return List<Produto>
+     */
     private List<Produto> verificarProdutos(List<Produto> produtos) {
         List<Produto> produtosAdcionarContato = new ArrayList<>();
 
@@ -95,10 +100,24 @@ public class ContatoService {
         return contatoRepository.save(contatoAtual);
     }
 
+
+    /**
+     * responsável por atualizar as listas de produtos
+     *
+      * @param contatoAtual
+     * @param contatoAtualizado
+     */
     private void atualizarListaProdutosDoContatoAoAtualizar(Contato contatoAtual,
                                                             Contato contatoAtualizado) {
         List<Produto> listaProdutos = verificarProdutos(contatoAtualizado.getProdutos());
         listaProdutos.addAll(contatoAtual.getProdutos());
         contatoAtual.setProdutos(listaProdutos);
+    }
+
+    public void excluirContatoPorId(Integer id) {
+        Contato contato = procurarContatoPorId(id);
+        contato.setProdutos(null);
+        contato = contatoRepository.save(contato);
+        contatoRepository.delete(contato);
     }
 }
