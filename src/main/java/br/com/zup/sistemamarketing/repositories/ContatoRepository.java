@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ContatoRepository extends CrudRepository<Contato, Integer> {
     Boolean existsByEmail(String email);
-    Iterable<Contato> findByProdutosNome(String nome);
-    Iterable<Contato> findByProdutosCategoriasNome(String nome);
+    Iterable<Contato> findAllByProdutosNome(String nome);
+    Iterable<Contato> findAllByProdutosCategoriasNome(String nome);
 }

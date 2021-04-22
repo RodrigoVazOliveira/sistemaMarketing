@@ -125,7 +125,7 @@ public class ContatoService {
             return obterTodosContatos();
         }
 
-        return contatoRepository.findByProdutosNome(nome);
+        return contatoRepository.findAllByProdutosNome(nome);
     }
 
     public Iterable<Contato> procurarContatoPorNomeDeCategoriaDoProduto(String nome) {
@@ -133,6 +133,6 @@ public class ContatoService {
             return obterTodosContatos();
         }
 
-        return contatoRepository.findByProdutosCategoriasNome(nome);
+        return contatoRepository.findAllByProdutosCategoriasNome(nome);
     }
 }

@@ -43,7 +43,7 @@ public class CategoriaService {
     }
 
     public Iterable<Categoria> procurarCategoriaPorIdOuNome(Integer id, String nome) {
-        return categoriaRepository.findByIdOrNome(id, nome);
+        return categoriaRepository.findAllByIdOrNome(id, nome);
     }
 
     public Iterable<Categoria> obterTodasCategoria() {
