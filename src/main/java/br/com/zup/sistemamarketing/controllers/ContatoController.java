@@ -54,7 +54,7 @@ public class ContatoController {
             if (contatoService.contatoExiste(id)) {
               return atualizarContatoExistente(atualizarContatoDTO.converterDtoParaModelo(id));
             }
-            return atualizarContatoNaoExistente(atualizarContatoDTO.converterDtoParaModelo(id));
+            return atualizarContatoNaoExistente(atualizarContatoDTO.converterDtoParaModelo(null));
         } catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
