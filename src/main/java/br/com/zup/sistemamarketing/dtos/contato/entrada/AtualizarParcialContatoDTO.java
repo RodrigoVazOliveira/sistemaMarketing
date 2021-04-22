@@ -16,7 +16,7 @@ public class AtualizarParcialContatoDTO {
     private String nomeCompleto;
     private String email;
     private String telefone;
-    private List<CadastrarContatoProdutoDTO> produtos;
+    private List<String> produtos;
 
 
     public AtualizarParcialContatoDTO() {
@@ -26,7 +26,7 @@ public class AtualizarParcialContatoDTO {
                                       String nomeCompleto,
                                       String email,
                                       String telefone,
-                                      List<CadastrarContatoProdutoDTO> produtos) {
+                                      List<String> produtos) {
         this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.email = email;
@@ -58,11 +58,11 @@ public class AtualizarParcialContatoDTO {
         this.telefone = telefone;
     }
 
-    public List<CadastrarContatoProdutoDTO> getProdutos() {
+    public List<String> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(List<CadastrarContatoProdutoDTO> produtos) {
+    public void setProdutos(List<String> produtos) {
         this.produtos = produtos;
     }
 
@@ -92,9 +92,9 @@ public class AtualizarParcialContatoDTO {
             return null;
         }
 
-        for (CadastrarContatoProdutoDTO dto : produtos) {
+        for (String nome : produtos) {
             produtosModelo.add(
-                    dto.converterDtoParaModelo()
+                    new Produto(nome, null)
             );
         }
 
