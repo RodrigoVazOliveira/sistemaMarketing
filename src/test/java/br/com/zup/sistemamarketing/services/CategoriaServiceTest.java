@@ -184,4 +184,21 @@ public class CategoriaServiceTest {
             categoriaService.excluirCategoriaPorId(1);
         });
     }
+
+    @Test
+    public void testarVerificarCategoriaPorNomeOk() {
+        Optional<Categoria> optionalCategoria = Optional.of(categoria);
+        Mockito.when(categoriaRepository.findByNome(Mockito.anyString())).thenReturn(optionalCategoria);
+        Categoria teste = categoriaService.verificarCategoriaPorNome(categoria);
+        Assertions.assertEquals(teste, categoria);
+    }
+
+    @Test
+    public void testarVerificarCategoriaPorNomeOkDois() {
+        Optional<Categoria> optionalCategoria = Optional.empty();
+        Mockito.when(categoriaRepository.findByNome(Mockito.anyString())).thenReturn(optionalCategoria);
+        Mockito.when(categoriaRepository.save(Mockito.any(Categoria.class))).thenReturn(categoria);
+        Categoria teste = categoriaService.verificarCategoriaPorNome(categoria);
+        Assertions.assertEquals(teste, categoria);
+    }
 }
