@@ -1,6 +1,7 @@
 package br.com.zup.sistemamarketing.controllers;
 
 import br.com.zup.sistemamarketing.dtos.contato.entrada.AtualizarContatoDTO;
+import br.com.zup.sistemamarketing.dtos.contato.entrada.AtualizarParcialContatoDTO;
 import br.com.zup.sistemamarketing.dtos.contato.entrada.CadastrarContatoDTO;
 import br.com.zup.sistemamarketing.dtos.contato.saida.ContatoDTO;
 import br.com.zup.sistemamarketing.models.Contato;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.servlet.http.PushBuilder;
 import javax.validation.Valid;
 
 @RestController
@@ -69,5 +71,23 @@ public class ContatoController {
         Contato contatoSalvo = contatoService.cadastrarNovoContato(contato);
         ContatoDTO contatoDTO = ContatoDTO.converterModeloParaDto(contatoSalvo);
         return ResponseEntity.status(201).body(contatoDTO);
+    }
+
+    @PatchMapping("{id}/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ContatoDTO atualizarContatoParcialmente(@PathVariable Integer id,
+                                                   @RequestBody
+                                                   @Valid
+                                                   AtualizarParcialContatoDTO atualizarParcialContatoDTO) {
+
+            try {
+                Contato contatoAtualizado = contatoService.atualizarContatoParcialmente(
+                        atualizarParcialContatoDTO.converterDtoParaModelo(id)
+                );
+                return ContatoDTO.converterModeloParaDto(contatoAtualizado);
+            } catch (RuntimeException e) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+            }
+
     }
 }
