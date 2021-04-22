@@ -1,12 +1,16 @@
 package br.com.zup.sistemamarketing.exceptions;
 
+import br.com.zup.sistemamarketing.exceptions.categoria.CategoriaNaoExisteException;
 import br.com.zup.sistemamarketing.exceptions.validacao.ErroDeValidacao;
 import br.com.zup.sistemamarketing.exceptions.validacao.ValidacaoComArgs;
+import br.com.zup.sistemamarketing.exceptions.validacao.ValidacaoSemArgs;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -37,5 +41,11 @@ public class HandlerException extends ResponseEntityExceptionHandler {
         }
 
         return erros;
+    }
+
+    @ExceptionHandler({CategoriaNaoExisteException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ValidacaoSemArgs categoriaNaoExiste(CategoriaNaoExisteException e) {
+        return new ValidacaoSemArgs(e.getStatus(), e.getTipoDeErro(), e.getMotivo(), e.getMessage());
     }
 }
