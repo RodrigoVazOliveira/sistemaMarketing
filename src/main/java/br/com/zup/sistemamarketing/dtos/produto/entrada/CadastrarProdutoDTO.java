@@ -13,13 +13,13 @@ import java.util.List;
 
 public class CadastrarProdutoDTO {
 
-    @NotNull(message = "O campo nome não foi informado")
-    @NotEmpty(message = "O campo nome deve ser preenchido!")
-    @Length(message = "O campo nome possui um limite de 80 caracteres")
-    @NotBlank(message = "O campo nome está em branco!")
+    @NotNull(message = "{campo.nulo}")
+    @NotEmpty(message = "{campo.vazio}")
+    @Length(max = 80, message = "{campo.limite}")
+    @NotBlank(message = "{campo.branco}")
     private String nome;
 
-    @NotNull(message = "O campo categorias não foi informado")
+    @NotNull(message = "{campo.nulo}")
     @Size(min = 1, message = "deve ser informado ao menos uma categoria")
     private List<String> categorias;
 

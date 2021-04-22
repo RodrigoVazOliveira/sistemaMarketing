@@ -9,10 +9,10 @@ import javax.validation.constraints.NotNull;
 
 public class CadastrarCategoriaDTO {
 
-    @NotNull(message = "O campo nome não foi informado")
-    @NotEmpty(message = "O campo nome deve ser preenchido!")
-    @Length(message = "O campo nome possui um limite de 80 caracteres")
-    @NotBlank(message = "O campo nome está em branco!")
+    @NotNull(message = "{campo.nulo}")
+    @NotEmpty(message = "{campo.vazio}")
+    @Length(max = 80, message = "{campo.limite}")
+    @NotBlank(message = "{campo.branco}")
     private String nome;
 
     public CadastrarCategoriaDTO() {

@@ -5,6 +5,7 @@ import br.com.zup.sistemamarketing.models.Produto;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -14,23 +15,26 @@ public class AtualizarContatoDTO {
 
     private Integer id;
 
-    @NotNull(message = "O campo nome não foi informado")
-    @NotEmpty(message = "O campo nome deve ser preenchido!")
-    @Length(max = 150, message = "O campo nome possui um limite de 150 caracteres")
+    @NotNull(message = "{campo.nulo}")
+    @NotEmpty(message = "{campo.vazio}")
+    @NotBlank(message = "{campo.branco}")
+    @Length(max = 150, message = "{campo.limite}")
     private String nomeCompleto;
 
-    @NotNull(message = "O campo email não foi informado")
-    @NotEmpty(message = "O campo email deve ser preenchido!")
-    @Length(max = 255, message = "O campo email possui um limite de 255 caracteres")
-    @Email(message = "E-Mail inválido!")
+    @NotNull(message = "{campo.nulo}")
+    @NotEmpty(message = "{campo.vazio}")
+    @NotBlank(message = "{campo.branco}")
+    @Length(max = 255, message = "{campo.limite}")
+    @Email(message = "{campo.email}")
     private String email;
 
-    @NotNull(message = "O campo telefone não foi informado")
-    @NotEmpty(message = "O campo telefone deve ser preenchido!")
-    @Length(max = 25, message = "O campo telefone possui um limite de 25 caracteres")
+    @NotNull(message = "{campo.nulo}")
+    @NotEmpty(message = "{campo.vazio}")
+    @NotBlank(message = "{campo.branco}")
+    @Length(max = 25, message = "{campo.limite}!")
     private String telefone;
 
-    @NotNull(message = "O campo telefone não foi informado")
+    @NotNull(message = "{campo.nulo}")
     private List<String> produtos;
 
 
