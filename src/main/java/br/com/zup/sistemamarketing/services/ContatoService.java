@@ -1,5 +1,6 @@
 package br.com.zup.sistemamarketing.services;
 
+import br.com.zup.sistemamarketing.exceptions.contato.ContatoNaoExisteException;
 import br.com.zup.sistemamarketing.models.Contato;
 import br.com.zup.sistemamarketing.models.Produto;
 import br.com.zup.sistemamarketing.repositories.ContatoRepository;
@@ -55,7 +56,7 @@ public class ContatoService {
         Optional<Contato> optionalContato = contatoRepository.findById(id);
 
         if (optionalContato.isEmpty()) {
-            throw new RuntimeException("Contato com id " + id + " não existe");
+            throw new ContatoNaoExisteException("Contato com id " + id + " não existe");
         }
 
         return optionalContato.get();
