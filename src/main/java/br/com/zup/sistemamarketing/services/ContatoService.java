@@ -58,6 +58,10 @@ public class ContatoService {
         return optionalContato.get();
     }
 
+    public Boolean contatoExiste(Integer id) {
+        return contatoRepository.existsById(id);
+    }
+
     public Contato atualizarContatoCompleto(Contato contatoAtualizado) {
         Contato contatoAtual = procurarContatoPorId(contatoAtualizado.getId());
         contatoAtual.setNomeCompleto(contatoAtualizado.getNomeCompleto());
