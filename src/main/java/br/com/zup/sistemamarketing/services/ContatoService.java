@@ -1,5 +1,6 @@
 package br.com.zup.sistemamarketing.services;
 
+import br.com.zup.sistemamarketing.exceptions.contato.ContatoNaoExisteException;
 import br.com.zup.sistemamarketing.models.Contato;
 import br.com.zup.sistemamarketing.models.Produto;
 import br.com.zup.sistemamarketing.repositories.ContatoRepository;
@@ -15,13 +16,11 @@ public class ContatoService {
 
     private final ContatoRepository contatoRepository;
     private final ProdutoService produtoService;
-    private final CategoriaService categoriaService;
 
     @Autowired
-    public ContatoService(ContatoRepository contatoRepository, ProdutoService produtoService, CategoriaService categoriaService) {
+    public ContatoService(ContatoRepository contatoRepository, ProdutoService produtoService) {
         this.contatoRepository = contatoRepository;
         this.produtoService = produtoService;
-        this.categoriaService = categoriaService;
     }
 
     public Contato cadastrarNovoContato(Contato contato) {
@@ -57,7 +56,7 @@ public class ContatoService {
         Optional<Contato> optionalContato = contatoRepository.findById(id);
 
         if (optionalContato.isEmpty()) {
-            throw new RuntimeException("Contato com id " + id + " não existe");
+            throw new ContatoNaoExisteException("Contato com id " + id + " não existe");
         }
 
         return optionalContato.get();

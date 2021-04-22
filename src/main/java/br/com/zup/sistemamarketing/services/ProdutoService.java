@@ -1,5 +1,6 @@
 package br.com.zup.sistemamarketing.services;
 
+import br.com.zup.sistemamarketing.exceptions.produto.ProdutoNaoExisteException;
 import br.com.zup.sistemamarketing.models.Categoria;
 import br.com.zup.sistemamarketing.models.Produto;
 import br.com.zup.sistemamarketing.repositories.ProdutoRepository;
@@ -43,7 +44,7 @@ public class ProdutoService {
         Optional<Produto> optionalProduto = produtoRepository.findById(id);
 
         if (optionalProduto.isEmpty()) {
-            throw new RuntimeException("Não existe produto com id " + id);
+            throw new ProdutoNaoExisteException("Não existe produto com id " + id);
         }
 
         return optionalProduto.get();
@@ -53,7 +54,7 @@ public class ProdutoService {
         Optional<Produto> optionalProduto = produtoRepository.findByNome(nome);
 
         if (optionalProduto.isEmpty()) {
-            throw new RuntimeException("Não existe produto com nome " + nome);
+            throw new ProdutoNaoExisteException("Não existe produto com nome " + nome);
         }
 
         return optionalProduto.get();

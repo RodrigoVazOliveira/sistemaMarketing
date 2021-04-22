@@ -1,5 +1,6 @@
 package br.com.zup.sistemamarketing.services;
 
+import br.com.zup.sistemamarketing.exceptions.categoria.CategoriaNaoExisteException;
 import br.com.zup.sistemamarketing.models.Categoria;
 import br.com.zup.sistemamarketing.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class CategoriaService {
         Optional<Categoria> categoriaOptional = categoriaRepository.findById(id);
 
         if (categoriaOptional.isEmpty()) {
-            throw new RuntimeException("Categoria com id " + id + " não existe!");
+            throw new CategoriaNaoExisteException("Categoria com id " + id + " não existe!");
         }
 
         return categoriaOptional.get();
@@ -35,7 +36,7 @@ public class CategoriaService {
         Optional<Categoria> categoriaOptional = categoriaRepository.findByNome(nome);
 
         if (categoriaOptional.isEmpty()) {
-            throw new RuntimeException("Categoria com nome " + nome + " não existe!");
+            throw new CategoriaNaoExisteException("Categoria com nome " + nome + " não existe!");
         }
 
         return categoriaOptional.get();
