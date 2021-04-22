@@ -83,4 +83,12 @@ public class ContatoDTO {
                 ContatoProdutoDTO.converterListaProduto(contato.getProdutos())
         );
     }
+
+    public static List<ContatoDTO> converterListaModeloParaListaDto(Iterable<Contato> contatos) {
+        List<ContatoDTO> dto = new ArrayList<>();
+        contatos.forEach(contato -> {
+            dto.add(converterModeloParaDto(contato))
+        });
+        return dto;
+    }
 }
