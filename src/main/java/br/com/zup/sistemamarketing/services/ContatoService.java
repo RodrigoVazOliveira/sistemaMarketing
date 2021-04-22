@@ -87,7 +87,10 @@ public class ContatoService {
                 && !contatoAtualizado.getTelefone().equals(contatoAtual.getTelefone())) {
             contatoAtual.setTelefone(contatoAtualizado.getTelefone());
         }
-        atualizarListaProdutosDoContatoAoAtualizar(contatoAtual, contatoAtualizado);
+
+        if (contatoAtualizado.getProdutos() != null) {
+            atualizarListaProdutosDoContatoAoAtualizar(contatoAtual, contatoAtualizado);
+        }
 
         return contatoRepository.save(contatoAtual);
     }
