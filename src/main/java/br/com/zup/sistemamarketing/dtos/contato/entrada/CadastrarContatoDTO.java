@@ -28,15 +28,15 @@ public class CadastrarContatoDTO {
     @Length(max = 25, message = "O campo telefone possui um limite de 25 caracteres")
     private String telefone;
 
-    @NotNull(message = "O campo telefone não foi informado")
-    private List<CadastrarContatoProdutoDTO> produtos;
+    @NotNull(message = "O campo produtos não foi informado")
+    private List<String> produtos;
 
 
     public CadastrarContatoDTO() {
     }
 
     public CadastrarContatoDTO(String nome, String email, String telefone,
-                               List<CadastrarContatoProdutoDTO> produtos) {
+                               List<String> produtos) {
         this.nomeCompleto = nome;
         this.email = email;
         this.telefone = telefone;
@@ -67,11 +67,11 @@ public class CadastrarContatoDTO {
         this.telefone = telefone;
     }
 
-    public List<CadastrarContatoProdutoDTO> getProdutos() {
+    public List<String> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(List<CadastrarContatoProdutoDTO> produtos) {
+    public void setProdutos(List<String> produtos) {
         this.produtos = produtos;
     }
 
@@ -87,9 +87,9 @@ public class CadastrarContatoDTO {
     private List<Produto> converterListaContatoProdutoDtoParaListaModelo() {
         List<Produto> produtosModelo = new ArrayList<>();
 
-        for (CadastrarContatoProdutoDTO dto : produtos) {
+        for (String nome : produtos) {
             produtosModelo.add(
-                    dto.converterDtoParaModelo()
+                    new Produto(nome, null)
             );
         }
 

@@ -3,6 +3,7 @@ package br.com.zup.sistemamarketing.controllers;
 import br.com.zup.sistemamarketing.dtos.contato.entrada.AtualizarContatoDTO;
 import br.com.zup.sistemamarketing.dtos.contato.entrada.AtualizarParcialContatoDTO;
 import br.com.zup.sistemamarketing.dtos.contato.entrada.CadastrarContatoDTO;
+import br.com.zup.sistemamarketing.dtos.contato.entrada.FiltroPorNomeDeProdutoDTO;
 import br.com.zup.sistemamarketing.dtos.contato.saida.ContatoDTO;
 import br.com.zup.sistemamarketing.models.Contato;
 import br.com.zup.sistemamarketing.services.ContatoService;
@@ -99,5 +100,14 @@ public class ContatoController {
         } catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
+    }
+
+    @GetMapping("produtos")
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<ContatoDTO> procurarContatoPorNomeDeProduto(
+            @ModelAttribute FiltroPorNomeDeProdutoDTO filtroPorNomeDeProdutoDTO) {
+        return ContatoDTO.converterListaModeloParaListaDto(
+                contatoService.procurarContatoPorNomeDeProduto(filtroPorNomeDeProdutoDTO.getNome())
+        );
     }
 }

@@ -1,13 +1,7 @@
 package br.com.zup.sistemamarketing.dtos.contato.saida;
 
-import br.com.zup.sistemamarketing.dtos.contato.entrada.CadastrarContatoProdutoDTO;
 import br.com.zup.sistemamarketing.models.Contato;
-import br.com.zup.sistemamarketing.models.Produto;
-import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 

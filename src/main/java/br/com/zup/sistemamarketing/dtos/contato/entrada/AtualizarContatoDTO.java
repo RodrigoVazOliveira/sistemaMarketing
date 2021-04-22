@@ -31,7 +31,7 @@ public class AtualizarContatoDTO {
     private String telefone;
 
     @NotNull(message = "O campo telefone não foi informado")
-    private List<CadastrarContatoProdutoDTO> produtos;
+    private List<String> produtos;
 
 
     public AtualizarContatoDTO() {
@@ -41,7 +41,7 @@ public class AtualizarContatoDTO {
                                String nomeCompleto,
                                String email,
                                String telefone,
-                               List<CadastrarContatoProdutoDTO> produtos) {
+                               List<String> produtos) {
         this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.email = email;
@@ -73,11 +73,11 @@ public class AtualizarContatoDTO {
         this.telefone = telefone;
     }
 
-    public List<CadastrarContatoProdutoDTO> getProdutos() {
+    public List<String> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(List<CadastrarContatoProdutoDTO> produtos) {
+    public void setProdutos(List<String> produtos) {
         this.produtos = produtos;
     }
 
@@ -103,9 +103,9 @@ public class AtualizarContatoDTO {
     private List<Produto> converterListaContatoProdutoDtoParaListaModelo() {
         List<Produto> produtosModelo = new ArrayList<>();
 
-        for (CadastrarContatoProdutoDTO dto : produtos) {
+        for (String nome : produtos) {
             produtosModelo.add(
-                    dto.converterDtoParaModelo()
+                    new Produto(nome, null)
             );
         }
 
