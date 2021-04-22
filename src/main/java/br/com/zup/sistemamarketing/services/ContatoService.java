@@ -120,4 +120,8 @@ public class ContatoService {
         contato = contatoRepository.save(contato);
         contatoRepository.delete(contato);
     }
+
+    public Iterable<Contato> procurarContatoPorNomeDeProduto(String nome) {
+        return contatoRepository.findByProdutosNome(nome);
+    }
 }
