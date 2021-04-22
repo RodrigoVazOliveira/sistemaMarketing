@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContatoService {
@@ -45,5 +46,32 @@ public class ContatoService {
 
     public Iterable<Contato> obterTodosContatos() {
         return contatoRepository.findAll();
+    }
+
+    public Contato procurarContatoPorId(Integer id) {
+        Optional<Contato> optionalContato = contatoRepository.findById(id);
+
+        if (optionalContato.isEmpty()) {
+            throw new RuntimeException("Contato com id " + id + " não existe");
+        }
+
+        return optionalContato.get();
+    }
+
+    public Boolean contatoExiste(Integer id) {
+        return contatoRepository.existsById(id);
+    }
+
+    public Contato atualizarContatoCompleto(Contato contatoAtualizado) {
+        Contato contatoAtual = procurarContatoPorId(contatoAtualizado.getId());
+        contatoAtual.setNomeCompleto(contatoAtualizado.getNomeCompleto());
+        contatoAtual.setEmail(contatoAtualizado.getEmail());
+        contatoAtual.setTelefone(contatoAtualizado.getTelefone());
+
+        List<Produto> listaProdutos = verificarProdutos(contatoAtualizado.getProdutos());
+        listaProdutos.addAll(contatoAtual.getProdutos());
+        contatoAtual.setProdutos(listaProdutos);
+
+        return contatoRepository.save(contatoAtual);
     }
 }
