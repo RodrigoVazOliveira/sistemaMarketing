@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.net.URI;
 
 @RestController
 @RequestMapping("produtos/")
@@ -46,14 +44,11 @@ public class ProdutoController {
                                                         @RequestBody
                                                         @Valid
                                                         AtualizarProdutoDTO atualizarProdutoDTO) {
-        try {
-            if (produtoService.verificarProdutoExistePorId(id)) {
-               return atualizarSeProdutoExiste(atualizarProdutoDTO.converterDtoParaModelo(id));
-            }
-            return atualizarSeProdutoNaoExiste(atualizarProdutoDTO.converterDtoParaModelo(null));
-        } catch (RuntimeException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+
+        if (produtoService.verificarProdutoExistePorId(id)) {
+           return atualizarSeProdutoExiste(atualizarProdutoDTO.converterDtoParaModelo(id));
         }
+        return atualizarSeProdutoNaoExiste(atualizarProdutoDTO.converterDtoParaModelo(null));
     }
 
     private ResponseEntity<SaidaProdutoDTO> atualizarSeProdutoExiste(Produto produto) {
@@ -71,22 +66,14 @@ public class ProdutoController {
     @GetMapping("{id}/")
     @ResponseStatus(HttpStatus.OK)
     public SaidaProdutoDTO obterProdutoPorId(@PathVariable Integer id) {
-        try {
-            return SaidaProdutoDTO.converterModeloParaDto(
-                    produtoService.procurarProdutoPorId(id)
-            );
-        } catch (RuntimeException e) {
-            throw new ResponseStatusException(HttpStatus.OK, e.getMessage());
-        }
+        return SaidaProdutoDTO.converterModeloParaDto(
+                produtoService.procurarProdutoPorId(id)
+        );
     }
 
     @DeleteMapping("{id}/")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarProdutoPorId(@PathVariable Integer id) {
-        try {
-            produtoService.deletarProdutoPorId(id);
-        } catch (RuntimeException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
+        produtoService.deletarProdutoPorId(id);
     }
 }

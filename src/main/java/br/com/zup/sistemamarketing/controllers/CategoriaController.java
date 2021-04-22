@@ -9,7 +9,6 @@ import br.com.zup.sistemamarketing.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
@@ -44,23 +43,15 @@ public class CategoriaController {
     public SaidaCategoriaDTO atualizarCategoria(@RequestBody @Valid
                                                         AtualizarCategoriaDTO AtualizarCategoriaDTO,
                                                 @PathVariable Integer id) {
-        try {
-            Categoria categoria = categoriaService.atualizarCategoria(
-                    AtualizarCategoriaDTO.converterDtoParaCategoria(id));
-            return SaidaCategoriaDTO.converterModeloParaDto(categoria);
-        } catch (RuntimeException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
+        Categoria categoria = categoriaService.atualizarCategoria(
+                AtualizarCategoriaDTO.converterDtoParaCategoria(id));
+        return SaidaCategoriaDTO.converterModeloParaDto(categoria);
     }
 
     @DeleteMapping("{id}/")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluirCategoriaPorId(@PathVariable Integer id) {
-        try {
-            categoriaService.excluirCategoriaPorId(id);
-        } catch (RuntimeException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
+        categoriaService.excluirCategoriaPorId(id);
     }
 
     @GetMapping("buscar")
