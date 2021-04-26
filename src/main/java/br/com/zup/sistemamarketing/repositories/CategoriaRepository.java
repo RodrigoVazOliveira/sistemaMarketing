@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface CategoriaRepository extends CrudRepository<Categoria, Integer> {
     Optional<Categoria> findByNome(String nome);
     Iterable<Categoria> findAllByIdOrNome(Integer id, String nome);
+    Boolean existsByNome(String nome);
 }
