@@ -82,7 +82,7 @@ public class CategoriaServiceTest {
     public void testarProcurarCategoriaPorIdOk() {
         Optional<Categoria> optionalCategoria = Optional.of(categoria);
         Mockito.when(categoriaRepository.findById(Mockito.anyInt())).thenReturn(optionalCategoria);
-        Categoria teste = categoriaService.pro  curarCategoriaPorId(1);
+        Categoria teste = categoriaService.procurarCategoriaPorId(1);
         Assertions.assertEquals(teste, categoria);
     }
 

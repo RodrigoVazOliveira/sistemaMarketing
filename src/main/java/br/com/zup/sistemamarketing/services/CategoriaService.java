@@ -19,7 +19,9 @@ public class CategoriaService {
     }
 
     public Categoria cadastrarNovaCategoria(Categoria categoria) {
-        if (categoriaRepository.exists)
+        if (categoriaRepository.existsByNome(categoria.getNome())) {
+            return procurarCategoriaPorNome(categoria.getNome());
+        }
         return categoriaRepository.save(categoria);
     }
 
