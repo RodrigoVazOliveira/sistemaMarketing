@@ -19,6 +19,7 @@ public class CategoriaService {
     }
 
     public Categoria cadastrarNovaCategoria(Categoria categoria) {
+        if (categoriaRepository.exists)
         return categoriaRepository.save(categoria);
     }
 
